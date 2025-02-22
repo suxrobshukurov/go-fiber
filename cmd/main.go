@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"suxrobshukurov/go-fiber/config"
 	"suxrobshukurov/go-fiber/internal/pages"
 
@@ -9,7 +10,9 @@ import (
 )
 
 func main() {
-	config.Init()
+	// configs
+	config.LoadConfig()
+	serverConfig := config.NewServerConfig()
 
 	app := fiber.New()
 
@@ -19,5 +22,7 @@ func main() {
 	// handlers
 	pages.NewHandler(app)
 
-	app.Listen(":3000")
+	if err := app.Listen(serverConfig.Addr); err != nil {
+		log.Fatal(err)
+	}
 }
