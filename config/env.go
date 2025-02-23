@@ -15,6 +15,11 @@ const (
 	DefaultServerPort int    = 3000
 	DefaultServerHost string = "127.0.0.1"
 
+	LogLevelEnv      string = "LOG_LEVEL"
+	LogFormatEnv     string = "LOG_FORMAT"
+	LogLevelDefault  int    = 0
+	LogFormatDefault string = "json"
+
 	DatabaseURLEnv     string = "DATABASE_URL"
 	DatabaseDefaultURL string = "postgres://postgres@localhost:5432/postgres?sslmode=disable"
 )
@@ -40,6 +45,19 @@ func NewServerConfig() *ServerConfig {
 	}
 	sc.Addr = fmt.Sprintf("%s:%d", sc.Host, sc.Port)
 	return &sc
+}
+
+type LoggerConfig struct {
+	Level  int
+	Format string
+}
+
+func NewLoggerConfig() *LoggerConfig {
+	lc := LoggerConfig{
+		Level:  getInt(LogLevelEnv, LogLevelDefault),
+		Format: getString(LogFormatEnv, LogFormatDefault),
+	}
+	return &lc
 }
 
 func getInt(key string, defaultValue int) int {
