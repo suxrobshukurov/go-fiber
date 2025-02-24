@@ -1,0 +1,16 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ template "title" . }}</title>
+  {{ template "category_css" . }}
+</head>
+<body>
+  <header>Header 1</header>
+  <main>{{ template "content" . }}</main>
+  <footer>Footer 1</footer>
+</body>
+</html>
+{{ end }}

@@ -1,0 +1,30 @@
+{{ define "category_css" }}
+<style>
+  .categories {
+    list-style: none;
+    padding: 5px 10px;
+    margin: 0;
+    background: #e5e5e5;
+    border-radius: 5px;
+  }
+  .category {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+</style>
+{{ end }}
+{{ define "category" }}
+  <ul class="categories">
+    {{ range .Categories }}
+      <li class="category"><a href="{{ .Link }}" class="button">{{ .Name }}</a></li>
+    {{ end }}
+  </ul>
+{{ end }}
